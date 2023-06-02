@@ -1,0 +1,71 @@
+CREATE TABLE `mig_pdp_extract` (
+  `seq` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `page` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `comp` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `attr` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `val` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `comp_order` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `repli_order` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `locale` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `creation_date` datetime DEFAULT NULL,
+  `modify_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`seq`),
+  KEY `md_locale` (`page`,`locale`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='PDP Migration Extract';
+
+
+
+-- mig.mig_extract_excel_hist definition
+
+CREATE TABLE `mig_extract_excel_hist` (
+  `as_is_page` varchar(100) NOT NULL,
+  `sku` varchar(100) DEFAULT NULL,
+  `error_log` text,
+  `extract_yn` varchar(1) DEFAULT NULL,
+  `creation_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `modified_date` timestamp NULL DEFAULT NULL,
+  `creation_person` varchar(100) DEFAULT NULL,
+  `modified_person` varchar(100) DEFAULT NULL,
+  `start_number` int DEFAULT NULL,
+  `location` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`as_is_page`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `mig_pdp_mapping` (
+  `ext_no` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `locale` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `page` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `as_is_page` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `as_is_comp` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `to_be_comp` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `comp_order` int DEFAULT NULL,
+  `repli_order` int DEFAULT NULL,
+  `as_is_attr` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `to_be_attr` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `val` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  PRIMARY KEY (`ext_no`),
+  KEY `md_locale` (`as_is_page`,`locale`),
+  KEY `sku_locale` (`page`,`locale`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='PDP Migration Mapping';
+
+
+CREATE TABLE `mig_pdp_dcr` (
+  `seq` int NOT NULL AUTO_INCREMENT,
+  `locale` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `path` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `attr` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `val` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  `create_date` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  `modify_date` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
+  PRIMARY KEY (`seq`)
+) ENGINE=InnoDB AUTO_INCREMENT=81740 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin COMMENT='PDP Migration DCR';
+
+
+
+
+sku,gallary 통으로 가져가기 
+
+
